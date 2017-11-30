@@ -1,0 +1,28 @@
+{
+  "name": "deployer",
+  "version": "0.0.1",
+  "description": "A deployment tool written in NodeJS with support for popular frameworks out of the box. Edit",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charleslxh/deployer.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "Deployer",
+    "tool"
+  ],
+  "author": "Charles Liao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charleslxh/deployer/issues"
+  },
+  "homepage": "https://github.com/charleslxh/deployer#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "ssh2": "^0.5.5"
+  }
+}
