@@ -17,8 +17,8 @@ const errput = function () {
 };;
 
 exports.printTask = function (taskname, servers) {
-  output(`➤ Executing task ${chalk.green(taskname)}`);
-  output(`↳ on [${servers.join(', ')}]`);
+  output(`╭─ Executing task ${chalk.green(taskname)}`);
+  output(`╰─➤ on [${servers.join(', ')}]`);
 }
 
 exports.done = function (servers) {
@@ -58,7 +58,7 @@ exports.error = function (err) {
     err = err.stack;
   }
 
-  console.error(chalk.red(err))
+  console.log(chalk.red(err))
 }
 
 exports.warning = function (str) {
@@ -66,11 +66,15 @@ exports.warning = function (str) {
     str = str.stack;
   }
 
-  console.warning(chalk.yellow(str))
+  process.stdout.write(chalk.yellow(str))
 }
 
 exports.debug = function (str) {
-  console.debug(chalk.blue(str))
+  process.stdout.write(chalk.blue(str))
+}
+
+exports.info = function (str) {
+  process.stdout.write(chalk.green(str))
 }
 
 exports.log = console.log;

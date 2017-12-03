@@ -6,6 +6,7 @@ var path = require('path');
 var chalk = require('chalk');
 
 var deployer = require('../lib/deployer');
+var console = require('../lib/console');
 require('../lib/functions');
 
 try {
@@ -19,9 +20,11 @@ var deployerFile = require(path.resolve(process.cwd(), '.deployer.js'));
 
 deployer.run()
 .then(() => {
+  console.info('Deployed Successfully!');
   deployer.end();
 })
-.catch(() => {
+.catch((e) => {
+  console.error(e)
   deployer.end();
 });
 
