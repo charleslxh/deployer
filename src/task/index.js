@@ -5,8 +5,24 @@ class Task {
     this.name = name;
     this.callback = callback;
     this.description = '';
-    this.stages = [];
-    this.servers = [];
+    this._stages = null;
+    this._servers = null;
+  }
+
+  get servers() {
+    if (this._servers === null) {
+      return [];
+    }
+
+    return this._servers;
+  }
+
+  get stages() {
+    if (this._stages === null) {
+      return [];
+    }
+
+    return this._stages;
   }
 
   desc(desc) {

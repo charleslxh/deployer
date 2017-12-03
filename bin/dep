@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var os = require('os');
+var path = require('path');
+var chalk = require('chalk');
+
+var deployer = require('../lib/deployer');
+require('../lib/functions');
+
+try {
+  fs.lstatSync(path.resolve(process.cwd(), '.deployer.js'));
+} catch (e) {
+  console.log(chalk.bgRed.white('You must define a .deployer.js file.'));
+  process.exit(0);
+}
+
+var deployerFile = require(path.resolve(process.cwd(), '.deployer.js'));
+
+deployer.run()
+.then(() => {
+  deployer.end();
+})
+.catch(() => {
+  deployer.end();
+});
+

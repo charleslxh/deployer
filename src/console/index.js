@@ -1,15 +1,15 @@
 const chalk = require('chalk');
+const _ = require('../utils');
 
 const output = function () {
-  this.messages = Array.prototype.slice.call(arguments);
-
+  const messages = Array.prototype.slice.call(arguments);
   messages.push('\n');
 
   process.stdout.write(messages.join(' '), 'utf8');
 };
 
 const errput = function () {
-  this.messages = Array.prototype.slice.call(arguments);
+  const messages = Array.prototype.slice.call(arguments);
 
   messages.push('\n');
 
@@ -29,26 +29,48 @@ exports.ok = function (duration) {
   output(`${chalk.green('✔')} Ok [${duration}ms]`)
 }
 
-exports.stdout = function (str) {
+exports.stdin = function (str) {
   const lines = str.trim().split('\n');
 
-  console.log(chalk.gray('<'));
+  lines.forEach((line) => {
+    output(chalk.red(`> `) + chalk.gray(line));
+  });
+}
+
+exports.stdout = function (str) {
+  const lines = str.trim().split('\n');
 
   lines.forEach((line) => {
     output(chalk.gray(`< ${ line }`));
   });
-
-  output(chalk.gray('<'));
 }
 
 exports.stderr = function (str) {
   const lines = str.trim().split('\n');
 
-  output(chalk.gray('<'));
-
   lines.forEach((line) => {
     errput(chalk.gray('<') + chalk.red(line));
   });
-
-  output(chalk.gray('<'));
 }
+
+exports.error = function (err) {
+  if (err instanceof Error) {
+    err = err.stack;
+  }
+
+  console.error(chalk.red(err))
+}
+
+exports.warning = function (str) {
+  if (str instanceof Error) {
+    str = str.stack;
+  }
+
+  console.warning(chalk.yellow(str))
+}
+
+exports.debug = function (str) {
+  console.debug(chalk.blue(str))
+}
+
+exports.log = console.log;
