@@ -57,7 +57,6 @@ class Server extends EventEmitter {
 
       this._socket.on('error', (err) => {
         this._socket._state = 'failed';
-        console.log(this._socket.config);
         console.error(err);
         reject(err);
       });

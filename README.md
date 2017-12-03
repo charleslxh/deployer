@@ -38,3 +38,7 @@ run command:
 ```bash
 $ bin/dep
 ```
+
+result:
+
+![result](./result.png)

@@ -2,8 +2,8 @@
 
 var Promise = require('bluebird');
 
-server('staging', '115.29.172.241', 2022)
-  .user('daniujia')
+server('staging', '47.94.96.87', 22)
+  .user('charles')
   .identityFile('/Users/Charles/.ssh/id_rsa.pub', '/Users/Charles/.ssh/id_rsa', null)
 ;
 
