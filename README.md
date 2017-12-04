@@ -12,7 +12,7 @@ $ npm install deployer --save-dev
 
 create a file `.deployer.js` where you define youe tasks. 
 
-```bash
+```js
 // in .deployer.js
 
 server('staging', '192.168.1.1', 2022)
