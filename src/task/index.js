@@ -1,9 +1,6 @@
-const console = require('../console');
-
 class Task {
-  constructor(name, callback) {
+  constructor(name) {
     this.name = name;
-    this.callback = callback;
     this.description = '';
     this._stages = null;
     this._servers = null;
@@ -40,16 +37,8 @@ class Task {
     return this;
   }
 
-  async run() {
-    console.printTask(this.name, this.servers);
-
-    const startAt = new Date().valueOf();
-    await this.callback.apply(this);
-    const endAt = new Date().valueOf();
-
-    console.done(this.servers);
-    console.ok(endAt - startAt);
-  }
+  async run() {}
 }
 
-module.exports = Task;
+
+module.exports = Task

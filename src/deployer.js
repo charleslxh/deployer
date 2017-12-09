@@ -28,14 +28,12 @@ class Deployer {
     this.tasks[name] = task;
   }
 
-  async run() {
-    try {
-      for (let name in this.tasks) {
-        this.tasks[name] && await this.tasks[name].run();
-      }
-    } catch (e) {
-      console.log(e);
+  async run(taskName, options) {
+    if (!this.tasks[taskName]) {
+      throw new Error(`Task {${ taskName }} never be defined.`);
     }
+
+    await this.tasks[taskName].run(options);
   }
 
   end() {

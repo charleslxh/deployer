@@ -15,10 +15,16 @@ task('pwd', function() {
   return run('pwd');
 });
 
-task('with no promise', function() {
+task('with:no:promise', function() {
   return run('cd ~ && mkdir -p test')
         .then(() => run('cd test && echo "this the content of test.txt file" > test.txt'))
         .then(() => run('cd test && cat test.txt'))
         .then(() => run('cd test && ls -h'))
         .then(() => run('cd ~ && rm -rf test'));
 });
+
+task('group:tasks', [
+  'ls',
+  'pwd',
+  'with:no:promise'
+]);

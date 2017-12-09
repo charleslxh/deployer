@@ -1,5 +1,6 @@
 const console = require('./console');
-const Task = require('./task');
+const SingleTask = require('./task/singleTask');
+const GroupTask = require('./task/groupTask');
 const Server = require('./server');
 const Builder = require('./server/builder');
 const Environment = require('./server/environment');
@@ -34,8 +35,14 @@ global.runLocal = function (argument) {
 
 global.task = function (name, body) {
   if (_.isFunction(body)) {
-    let task = new Task(name, body)
+    let task = new SingleTask(name, body);
     deployer.addTask(name, task);
+  } else if (_.isArray(body)) {
+    let subTasks = body.map((_name) => deployer.getTask(_name));
+    let task = new GroupTask(name, subTasks);
+    deployer.addTask(name, task);
+  } else {
+    throw new TypeError(`Expect 2nd argument is a function or array, but got ${ Object.prototype.toString.call(body) }`);
   }
 }
 
