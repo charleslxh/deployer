@@ -7,15 +7,10 @@ class SingleTask extends Task {
     this.callback = callback;
   }
 
-  async run() {
-    console.printTask(this.name, this.servers);
-
-    const startAt = new Date().valueOf();
+  async run(options) {
+    super.run(options);
     await this.callback.apply(this);
-    const endAt = new Date().valueOf();
-
-    console.done(this.servers);
-    console.ok(endAt - startAt);
+    this.done()
   }
 }
 

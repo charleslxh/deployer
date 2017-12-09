@@ -3,9 +3,10 @@ const Client = require('ssh2');
 const console = require('../console');
 
 class Server extends EventEmitter {
-  constructor(config = {}, env = {}) {
+  constructor(name, config = {}, env = {}) {
     super();
 
+    this.name = name;
     this.config = config;
     this.env = env;
 
@@ -71,24 +72,20 @@ class Server extends EventEmitter {
 
   async _exec(command) {
     if (this._socket || this._socket._state !== 'ready') {
-      try {
-        await this._connect()
-      } catch (e) {
-        process.exit(0);
-      }
+      await this._connect();
     }
 
     return new Promise((resolve, reject) => {
-      console.stdin(command)
+      console.stdin(this.name, command)
       this._socket.exec(command, (err, stream) => {
         if (err) return reject(err);
 
         stream.on('data', (data) => {
-          console.stdout(data.toString('utf8'));
+          console.stdout(this.name, data.toString('utf8'));
         });
 
         stream.stderr.on('data', (data) => {
-          console.stderr(data.toString('utf8'));
+          console.stderr(this.name, data.toString('utf8'));
           reject(data.toString('utf8'));
         });
 

@@ -1,45 +1,61 @@
 const fs = require('fs');
+const Configuration = require('./configuration');
+const Environment = require('./environment');
+const utils = require('../utils');
 
 class Builder {
   constructor(config = {}, env = {}) {
+    if (!config instanceof Configuration) {
+      config = new Configuration();
+    }
+
+    if (!env instanceof Environment) {
+      env = new Environment();
+    }
+
     this.config = config;
     this.env = env;
   }
 
   host(host) {
-    this.config.host = host;
+    this.config.set('host', host);
     return this;
   }
 
   port(port) {
-    this.config.port = port;
+    this.config.set('port', port);
     return this;
   }
 
-  user(user) {
-    this.config.username = user;
+  user(username) {
+    this.config.set('username', username);
     return this;
   }
 
   password(password) {
-    this.config.password = password;
+    this.config.set('password', password);
     return this;
   }
 
-  stage(stage) {
-    this.config.stage = stage;
+  stages(stages) {
+    if (!utils.isArray(stages)) {
+      stages = [stages];
+    }
+
+    this.env.set('stages', stages);
     return this;
   }
 
   env(name, value) {
-    this.env[name] = value;
+    this.env.set(name, value);
     return this;
   }
 
   identityFile(publicKey, privateKey, passphrase) {
-    this.config.publicKey = fs.readFileSync(publicKey);
-    this.config.privateKey = fs.readFileSync(privateKey);
-    this.config.passphrase = passphrase;
+    this.config.set('publicKey', fs.readFileSync(publicKey));
+    this.config.set('privateKey', fs.readFileSync(privateKey));
+    this.config.set('passphrase', passphrase);
+    return this;
   }
 }
 

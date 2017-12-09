@@ -18,38 +18,38 @@ const errput = function () {
 
 exports.printTask = function (taskname, servers) {
   output(`╭─ Executing task ${chalk.green(taskname)}`);
-  output(`╰─➤ on [${servers.join(', ')}]`);
+  output(`╰─➤ on [${servers && servers.join(', ')}]`);
 }
 
 exports.done = function (servers) {
-  output(`${chalk.green('•')} done on [${servers.join(', ')}]`);
+  output(`${chalk.green('•')} done`);
 }
 
 exports.ok = function (duration) {
-  output(`${chalk.green('✔')} Ok [${duration}ms]`)
+  output(`${chalk.green('✔')} Ok [${ duration }ms]`)
 }
 
-exports.stdin = function (str) {
-  const lines = str.trim().split('\n');
+exports.stdin = function (flag, message) {
+  const lines = message.trim().split('\n');
 
   lines.forEach((line) => {
-    output(chalk.red(`> `) + chalk.gray(line));
+    output(chalk.red(`    > `) + chalk.gray(line));
   });
 }
 
-exports.stdout = function (str) {
-  const lines = str.trim().split('\n');
+exports.stdout = function (flag, message) {
+  const lines = message.trim().split('\n');
 
   lines.forEach((line) => {
-    output(chalk.gray(`< ${ line }`));
+    output(chalk.gray(`    < ${ line }`));
   });
 }
 
-exports.stderr = function (str) {
-  const lines = str.trim().split('\n');
+exports.stderr = function (flag, message) {
+  const lines = message.trim().split('\n');
 
   lines.forEach((line) => {
-    errput(chalk.gray('<') + chalk.red(line));
+    errput(chalk.gray(`    < `) + chalk.red(line));
   });
 }
 

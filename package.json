@@ -23,6 +23,7 @@
   "homepage": "https://github.com/charleslxh/deployer#readme",
   "dependencies": {
     "chalk": "^2.3.0",
+    "lodash": "^4.17.4",
     "ssh2": "^0.5.5"
   },
   "devDependencies": {
@@ -34,6 +35,7 @@
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
+    "gulp-error-handle": "^1.0.0",
     "gulp-util": "^3.0.8",
     "run-sequence": "^2.2.0",
     "webpack": "^3.9.1"

@@ -1,24 +1,19 @@
+const console = require('../console');
+
 class Task {
   constructor(name) {
     this.name = name;
     this.description = '';
     this._stages = null;
     this._servers = null;
+    this._status = 'initialized';
   }
 
   get servers() {
-    if (this._servers === null) {
-      return [];
-    }
-
     return this._servers;
   }
 
   get stages() {
-    if (this._stages === null) {
-      return [];
-    }
-
     return this._stages;
   }
 
@@ -28,16 +23,31 @@ class Task {
   }
 
   onlyForStages() {
-    this.stages = Array.prototype.slice.call(arguments);
+    this._stages = Array.prototype.slice.call(arguments);
     return this;
   }
 
   onlyForServers() {
-    this.servers = Array.prototype.slice.call(arguments);
+    this._servers = Array.prototype.slice.call(arguments);
     return this;
   }
 
-  async run() {}
+  run(options) {
+    this.status = 'running';
+    this._startAt = new Date().valueOf();
+    console.printTask(this.name, this.servers);
+  }
+
+  done() {
+    this.status = 'done';
+    this._endAt = new Date().valueOf();
+    console.done(this.servers);
+    console.ok(this._endAt - this._startAt);
+  }
+
+  isRunning() {
+    return this._status = 'running';
+  }
 }
 
 
