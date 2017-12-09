@@ -18,13 +18,13 @@ create a file `.deployer.js` where you define youe tasks.
 'use strict'
 
 server('s1', '192.168.100.1', 22)
-  .user('charles')
+  .user('user')
   .identityFile('/Users/Charles/.ssh/id_rsa.pub', '/Users/Charles/.ssh/id_rsa', null)
   .stages(['dev'])
 ;
 
 server('s2', '192.168.100.2', 22)
-  .user('daniujia')
+  .user('user')
   .identityFile('/Users/Charles/.ssh/id_rsa.pub', '/Users/Charles/.ssh/id_rsa', null)
   .stages(['staging'])
 ;
