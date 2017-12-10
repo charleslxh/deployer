@@ -1,6 +1,6 @@
 {
-  "name": "deployer",
-  "version": "0.0.1",
+  "name": "node-deployer",
+  "version": "0.1.1",
   "description": "A deployment tool written in NodeJS with support for popular frameworks out of the box. Edit",
   "main": "src/main.js",
   "scripts": {

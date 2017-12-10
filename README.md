@@ -5,7 +5,7 @@
 ## Install 
 
 ```bash
-$ npm install deployer --save-dev
+$ npm install node-deployer --save-dev
 ```
 
 ## Examples
