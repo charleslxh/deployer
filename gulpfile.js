@@ -23,7 +23,7 @@ gulp.task('babel', () => {
   return gulp.src('src/**/*.js')
     .pipe(errorHandler())
     .pipe(babel({
-      presets: ['es2015', 'stage-0'],
+      presets: ['env'],
       plugins: ['transform-runtime']
     }))
     .pipe(gulp.dest('./lib/'))
