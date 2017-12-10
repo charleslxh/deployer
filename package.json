@@ -1,6 +1,6 @@
 {
   "name": "node-deployer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A deployment tool written in NodeJS with support for popular frameworks out of the box. Edit",
   "main": "src/main.js",
   "scripts": {
@@ -41,6 +41,6 @@
     "webpack": "^3.9.1"
   },
   "bin": {
-    "dep": "./bin/dep.js"
+    "depl": "./bin/dep.js"
   }
 }
