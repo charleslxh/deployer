@@ -5,12 +5,12 @@
 ## Install 
 
 ```bash
-$ npm install node-deployer --save-dev
+$ npm install node-deployer -g
 ```
 
 ## Examples
 
-create a file `.deployer.js` where you define youe tasks. 
+Under your project, create a file `.deployer.js` where define your tasks. 
 
 ```js
 // in .deployer.js
@@ -68,9 +68,42 @@ task('group:tasks', [
 run command:
 
 ```bash
-$ bin/dep group:tasks --stages=staging
+$ depl group:tasks --stages=staging
 ```
+
+run `--help` or `-h` to see the usage.
 
 result:
 
 ![result](./result.png)
+
+## How to use
+
+### global functions
+
+`node-deployer` have many global functions, you can use them to define task, server and so on.
+
+- **server**(< *string* >serverName, < *string* >host, < *number* >port) - add a sevrer.
+  
+  `server()` return a `Builder` instance, you can config other options:
+
+  + **server**(< *string* >host) - update server host.
+  + **port**(< *number* >port) - update server port.
+  + **user**(< *string* >user) - update the login username.
+  + **password**(< *string* >password) - update the login password.
+  + **stages**(< *string*|*array* >stages) - define the stages of this server.
+  + **env**(< *string* >key, value) - define a env property.
+  + **identityFile**(< *string* >publicKey, < *string* >privateKey, < *string* >passphrase) - define the ssh keys.
+
+- **task**(< *string* >taskName, < *function*|*array* >) - add a task.
+
+  `task()` return a `Task` instance, you can config some options:
+
+  + **desc**(< *string* >desc) - task description.
+  + **onlyForStages**(< *string* >stage, ...) - the task can run on which stage.
+  + **onlyForServers****(< *string* >server, ...) - the task can run on which server.
+
+## As a contributor
+
+fork it, then clone project, finally run `gulp`.
+
