@@ -23,6 +23,7 @@
   "homepage": "https://github.com/charleslxh/deployer#readme",
   "dependencies": {
     "chalk": "^2.3.0",
+    "commander": "^2.12.2",
     "ssh2": "^0.5.5"
   },
   "devDependencies": {
@@ -40,6 +41,6 @@
     "webpack": "^3.9.1"
   },
   "bin": {
-    "dep": "./bin/dep"
+    "dep": "./bin/dep.js"
   }
 }

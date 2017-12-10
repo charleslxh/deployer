@@ -6,9 +6,11 @@ var fs = require('fs');
 var os = require('os');
 var path = require('path');
 var chalk = require('chalk');
+var program = require('commander');
 
 var deployer = require('../lib/deployer');
 var console = require('../lib/console');
+var version = require('../package.json').version;
 require('../lib/functions');
 
 try {
@@ -18,18 +20,24 @@ try {
   process.exit(0);
 }
 
-var options = { stages: ['dev'] };
-var lang = process.argv.shift();
-var command = process.argv.shift();
-var taskName = process.argv.shift();
-process.argv.forEach(function(argv) {
-  var flags = argv.split('=', 2);
-  if (flags.length < 2) return;
+var taskName,
+    options = { stages: ['dev'] };
 
-  var key = flags[0].substr(2);
-  var values = flags[1].split(',');
-  options[key] = values;
-});
+program
+  .version(version)
+  .usage('task [options]')
+  .arguments('<task>')
+  .option('-s, --stages <stages>', 'Specify stages you want to run', function(value) {
+    return value.split(',');
+  })
+  .action(function (task) {
+    taskName = task;
+  })
+  .parse(process.argv);
+
+if (program.stages) {
+  options.stages = program.stages
+}
 
 var deployerFile = require(path.resolve(process.cwd(), '.deployer.js'));
 
